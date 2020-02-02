@@ -12,13 +12,13 @@ function showTask(task) {
         $("#listComments").empty();
         $("#comments").hide()
     } else {
-        $("#taskName").val(task.Name);
-        $("#taskStatus").val(task.Status);
-        $("#taskDescription").val(task.Description);
+        $("#taskName").val(task.task_name);
+        $("#taskStatus").val(task.task_status);
+        $("#taskDescription").val(task.task_description);
         var list = $("#listComments");
-        for (var i = 0; i < task.Comments.length; i++)
+        for (var i = 0; i < task.comments.length; i++)
         {
-            list.append(task.Comments[i]);
+            list.append(task.comments[i].text_comment);
         }
         $("#comments").show();
     }
@@ -35,7 +35,7 @@ function editTask() {
         dataType: "json",
         method: "GET",
         cache: false,
-        url: "editTask.php?id=" + taskId
+        url: "../task/editTask/?id=" + taskId
     }).done(function(task) {
         showTask(task);
         $("#taskEdit").show();
@@ -73,15 +73,15 @@ function saveComment() {
 
 function saveTask() {
     var task = {};
-    task.Id = taskId;
-    task.Name = $("#taskName").val();
-    task.Status = $("#taskStatus").val();
-    task.Description = $("#taskDescription").val();
+    task.task_id = taskId;
+    task.task_name = $("#taskName").val();
+    task.task_status = $("#taskStatus").val();
+    task.task_description = $("#taskDescription").val();
     $.ajax({
         dataType: "json",
         method: "POST",
         data: task,
-        url: "saveTask.php"
+        url: "../task/saveTask/"
     }).done(function() {
         loadTasks();
         $("#taskEdit").show();
@@ -136,7 +136,7 @@ function loadTasks() {
         dataType: "json",
         method: "GET",
         cache: false,
-        url: "task/getTasks/"
+        url: "../task/getTasks/"
     }).done(function(tasks) {
         showTasks(tasks);
         $("#taskList .editTask").click(editTask);
