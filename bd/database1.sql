@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 02 2020 г., 22:59
+-- Время создания: Фев 02 2020 г., 23:20
 -- Версия сервера: 5.7.25
 -- Версия PHP: 7.1.32
 
@@ -25,22 +25,15 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `comments`
+-- Структура таблицы `comments_copy`
 --
 
-CREATE TABLE `comments` (
-  `id_comments` int(11) UNSIGNED NOT NULL,
+CREATE TABLE `comments_copy` (
+  `id` int(11) UNSIGNED NOT NULL,
   `comment_date` datetime NOT NULL,
   `text_comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_task` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `comments`
---
-
-INSERT INTO `comments` (`id_comments`, `comment_date`, `text_comment`, `id_task`) VALUES
-(1, '2020-02-02 00:00:00', '3333', 1);
 
 -- --------------------------------------------------------
 
@@ -62,28 +55,6 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `task_status`, `task_date`, `task_name`, `task_description`, `id_user`) VALUES
-(1, 'TODO', '2020-02-02 00:00:00', '111', 'axaxa', 1);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `tasks_copy`
---
-
-CREATE TABLE `tasks_copy` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `task_status` enum('TODO','DOING','DONE') NOT NULL,
-  `task_date` datetime NOT NULL,
-  `task_name` varchar(255) NOT NULL,
-  `task_description` varchar(255) DEFAULT NULL,
-  `id_user` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `tasks_copy`
---
-
-INSERT INTO `tasks_copy` (`id`, `task_status`, `task_date`, `task_name`, `task_description`, `id_user`) VALUES
 (1, 'DOING', '2020-02-02 22:28:14', '111', 'axaxa', 1);
 
 -- --------------------------------------------------------
@@ -111,11 +82,11 @@ INSERT INTO `users` (`id_user`, `login`, `psw_hash`, `email`) VALUES
 --
 
 --
--- Индексы таблицы `comments`
+-- Индексы таблицы `comments_copy`
 --
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id_comments`),
-  ADD KEY `FK_comments_tasks_id_task` (`id_task`);
+ALTER TABLE `comments_copy`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_comments_copy_tasks_id` (`id_task`);
 
 --
 -- Индексы таблицы `tasks`
@@ -123,12 +94,6 @@ ALTER TABLE `comments`
 ALTER TABLE `tasks`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_tasks_users_id_user` (`id_user`);
-
---
--- Индексы таблицы `tasks_copy`
---
-ALTER TABLE `tasks_copy`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `users`
@@ -141,16 +106,26 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT для таблицы `comments`
---
-ALTER TABLE `comments`
-  MODIFY `id_comments` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
   MODIFY `id_user` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `comments_copy`
+--
+ALTER TABLE `comments_copy`
+  ADD CONSTRAINT `FK_comments_copy_tasks_id` FOREIGN KEY (`id_task`) REFERENCES `tasks` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ограничения внешнего ключа таблицы `tasks`
+--
+ALTER TABLE `tasks`
+  ADD CONSTRAINT `FK_tasks_users_id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
