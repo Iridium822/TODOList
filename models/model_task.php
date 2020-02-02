@@ -15,11 +15,15 @@ class Model_Task extends Model
             ->order_by_desc('task_date')
             ->find_array();
         //var_dump($tasks);
-        foreach ($tasks as $key => $value){
-            $comments = ORM::for_table(comments)->where('id_task', $key)->find_array();
+        //echo count($tasks);
+        for ($i=0; $i < count($tasks); $i++){
+            $count_comments = 0;
+            $comments = ORM::for_table(comments)->where('id_task', $i+1)->find_array();
+            //var_dump($comments);
             $count_comments = count($comments);
-            $tasks[$key]['countComments'] = $count_comments;
+            $tasks[$i]['countComments'] = $count_comments;
         }
+
         return $tasks;
     }
 
