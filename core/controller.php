@@ -1,18 +1,21 @@
 <?php
-namespace app\core;
+
 /*
- * Abstract controller class
+ * Controller class
  */
-abstract class Controller
+class Controller
 {
     public $model;
     public $view;
 
     function __construct()
     {
-        $this->view = new app/core/View();
+
+        $this->view = new View();
     }
 
-    abstract function action_index();
+    function action_index(){
+
+    }
 
 }

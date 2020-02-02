@@ -1,7 +1,4 @@
 <?php
-
-
-namespace app\core;
 /*
  * Router Class
  */
@@ -10,22 +7,23 @@ class Route
 {
     static function start()
     {
-        // контроллер и действие по умолчанию
+        // default
         $controller_name = 'Main';
         $action_name = 'index';
 
-        $routes = explode('/', SERVER_PATH);
+        $routes = explode('/', $_SERVER['REQUEST_URI']);
 
         // get controller name
-        if ( !empty($routes[1]) )
+        //TODO: Parsing url function
+        if ( !empty($routes[2]) )
         {
-            $controller_name = $routes[1];
+            $controller_name = $routes[2];
         }
 
         // get action name
-        if ( !empty($routes[2]) )
+        if ( !empty($routes[3]) )
         {
-            $action_name = $routes[2];
+            $action_name = $routes[3];
         }
 
         // add prefix
@@ -62,7 +60,7 @@ class Route
         }
 
         // create controller
-        $controller = new app/controller/$controller_name;
+        $controller = new $controller_name;
         $action = $action_name;
 
         if(method_exists($controller, $action))

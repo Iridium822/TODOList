@@ -1,23 +1,24 @@
 <?php
 
 
-namespace app\core;
+
 
 /*
- * Abstract view class
+ * View class
  */
 
-abstract class View
+class View
 {
     /*
      * Generate page function
      * $template_view - general template
      * $content_view - layout
      */
-    function generate($content_view, $template_view, $data = null)
+    static function generate($content_view, $template_view, $data = null)
     {
 
         include 'views/' . $template_view;
+
     }
 
 }
