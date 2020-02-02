@@ -29,6 +29,8 @@ class Controller_Task extends Controller
         if (isset($_POST)){
             $data = $_POST;
             model_task::saveTask($data);
+
         }
+        echo json_encode(1);
     }
 }

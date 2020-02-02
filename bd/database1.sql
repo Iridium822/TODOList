@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 02 2020 г., 23:20
+-- Время создания: Фев 03 2020 г., 01:15
 -- Версия сервера: 5.7.25
 -- Версия PHP: 7.1.32
 
@@ -25,15 +25,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `comments_copy`
+-- Структура таблицы `comments`
 --
 
-CREATE TABLE `comments_copy` (
+CREATE TABLE `comments` (
   `id` int(11) UNSIGNED NOT NULL,
   `comment_date` datetime NOT NULL,
   `text_comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_task` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `comments`
+--
+
+INSERT INTO `comments` (`id`, `comment_date`, `text_comment`, `id_task`) VALUES
+(1, '2020-02-03 00:53:25', '77777', 1),
+(2, '2020-02-03 00:53:41', 'TTTTTT', 1),
+(3, '2020-02-03 00:56:05', 'TTTTTT', 1),
+(4, '2020-02-03 00:56:19', '1111', 1),
+(5, '2020-02-03 00:56:36', '5555', 1),
+(6, '2020-02-03 00:57:21', 'cfdhuy', 1),
+(7, '2020-02-03 00:59:15', 'rtehu', 1);
 
 -- --------------------------------------------------------
 
@@ -55,7 +68,8 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `task_status`, `task_date`, `task_name`, `task_description`, `id_user`) VALUES
-(1, 'DOING', '2020-02-02 22:28:14', '111', 'axaxa', 1);
+(1, 'DOING', '2020-02-03 00:56:22', '111', 'axaxa77789', 1),
+(2, 'TODO', '2020-02-03 01:13:00', 'test1', 'frwfgtr', 1);
 
 -- --------------------------------------------------------
 
@@ -82,11 +96,11 @@ INSERT INTO `users` (`id_user`, `login`, `psw_hash`, `email`) VALUES
 --
 
 --
--- Индексы таблицы `comments_copy`
+-- Индексы таблицы `comments`
 --
-ALTER TABLE `comments_copy`
+ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_comments_copy_tasks_id` (`id_task`);
+  ADD KEY `FK_comments_tasks_id` (`id_task`);
 
 --
 -- Индексы таблицы `tasks`
@@ -106,6 +120,18 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT для таблицы `tasks`
+--
+ALTER TABLE `tasks`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
@@ -116,10 +142,10 @@ ALTER TABLE `users`
 --
 
 --
--- Ограничения внешнего ключа таблицы `comments_copy`
+-- Ограничения внешнего ключа таблицы `comments`
 --
-ALTER TABLE `comments_copy`
-  ADD CONSTRAINT `FK_comments_copy_tasks_id` FOREIGN KEY (`id_task`) REFERENCES `tasks` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `comments`
+  ADD CONSTRAINT `FK_comments_tasks_id` FOREIGN KEY (`id_task`) REFERENCES `tasks` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ограничения внешнего ключа таблицы `tasks`

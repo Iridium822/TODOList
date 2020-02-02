@@ -18,7 +18,7 @@ class Model_Task extends Model
     }
 
     static public function editTask($id){
-        $tasks = ORM::for_table('tasks')->where('id_task', $id)->find_array();
+        $tasks = ORM::for_table('tasks')->where('id', $id)->find_array();
         $task = $tasks[0];
         $comments = ORM::for_table(comments)->where('id_task', $id)->find_array();
         $task['comments'] = $comments;
@@ -27,25 +27,20 @@ class Model_Task extends Model
     }
 
     static public function saveTask($data){
-        var_dump($data);
+
         $id_task = $data['task_id'];
-        echo $id_task;
-        ORM::configure('id_task', 'primary_key');
-        $task = ORM::for_table('tasks_copy')->where('id', $id_task)->find_one();
-        echo $task->task_name;
-        var_dump($task);
-        ORM::configure('id_task', 'primary_key');
-        //$task->set(array(
-           //'id_task' => $data['task_id'],
-           // 'task_status' => $data['task_status'],
-          //  'task_description'  => $data['task_description'],
-          //  'task_name' => $data['task_name']));
-      //$task->id_task=$id_task;
-     $task->task_status=$data['task_status'];
-     $task->task_description=$data['task_description'];
-       $task->task_name=$data['task_name'];
-       $task->task_date = date('Y-m-d H:i:s');
-      $task->save();
-        return true;
+        if ($id_task > 0) {
+            $task = ORM::for_table('tasks')->where('id', $id_task)->find_one();
+        } else {
+            $task = ORM::for_table('tasks')->create();
+            $task->id_user=1;
+        }
+
+        $task->task_status=$data['task_status'];
+        $task->task_description=$data['task_description'];
+        $task->task_name=$data['task_name'];
+        $task->task_date = date('Y-m-d H:i:s');
+        $task->save();
+
     }
 }

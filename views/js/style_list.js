@@ -10,18 +10,21 @@ function showTask(task) {
         $("#taskStatus").val("");
         $("#taskDescription").val("");
         $("#listComments").empty();
-        $("#comments").hide()
+        $("#comments").hide();
     } else {
         $("#taskName").val(task.task_name);
         $("#taskStatus").val(task.task_status);
         $("#taskDescription").val(task.task_description);
         var list = $("#listComments");
+        list.empty();
         for (var i = 0; i < task.comments.length; i++)
         {
-            list.append(task.comments[i].text_comment);
+            list.append("<li>" + task.comments[i].text_comment +"</li>");
         }
         $("#comments").show();
     }
+    $("#taskEdit").show();
+    $("#taskList").hide();
 }
 
 function editTask() {
@@ -38,8 +41,6 @@ function editTask() {
         url: "../task/editTask/?id=" + taskId
     }).done(function(task) {
         showTask(task);
-        $("#taskEdit").show();
-        $("#taskList").hide();
     }).fail(function() {
         alert("Error");
     });
@@ -54,16 +55,16 @@ function addComment() {
 
 function saveComment() {
     var comment = {
-        TaskId: taskId,
-        Comment: $("#comment").val()
+        task_id: taskId,
+        text_comment: $("#comment").val()
     }
     $.ajax({
         dataType: "json",
         method: "POST",
         data: comment,
-        url: "saveTask.php"
+        url: "../comment/saveComment/"
     }).done(function() {
-        $("#listComments").append(comment.Comment);
+        $("#listComments").append("<li>" + comment.text_comment + "</li>");
         $("#comment, #saveComment").hide();
         $("#addComment").show();
     }).fail(function() {
@@ -84,9 +85,9 @@ function saveTask() {
         url: "../task/saveTask/"
     }).done(function() {
         loadTasks();
-        $("#taskEdit").show();
-        $("#taskList").hide();
-    }).fail(function() {
+        $("#taskEdit").hide();
+        $("#taskList").show();
+    }).fail(function(err1,err2,err3) {
         alert("Error");
     });
 }
@@ -124,7 +125,7 @@ function showTasks(tasks) {
         }
         content.append(
             "<div>" +
-            "<a class='editTask' href='#' data-id='" + task.id_task + "'>" + task.task_name + "</a>" +
+            "<a class='editTask' href='#' data-id='" + task.id + "'>" + task.task_name + "</a>" +
             "<span>(" + task.CountComments +  ")</span>" +
             "</div>"
         );
