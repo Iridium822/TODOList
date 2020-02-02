@@ -1,0 +1,12 @@
+{
+  "name": "iridium822/todolist",
+  "description": "test task",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Tatyana Spasoyevich",
+      "email": "tanuha253@tut.by"
+    }
+  ]
+}
