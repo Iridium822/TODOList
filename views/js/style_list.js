@@ -87,7 +87,7 @@ function saveTask() {
         loadTasks();
         $("#taskEdit").hide();
         $("#taskList").show();
-    }).fail(function(err1,err2,err3) {
+    }).fail(function() {
         alert("Error");
     });
 }
@@ -126,7 +126,7 @@ function showTasks(tasks) {
         content.append(
             "<div>" +
             "<a class='editTask' href='#' data-id='" + task.id + "'>" + task.task_name + "</a>" +
-            "<span>(" + task.CountComments +  ")</span>" +
+            "<span>(" + task.countComments +  ")</span>" +
             "</div>"
         );
     }

@@ -14,6 +14,12 @@ class Model_Task extends Model
             join('users', 'tasks.id_user = users.id_user')
             ->order_by_desc('task_date')
             ->find_array();
+        //var_dump($tasks);
+        foreach ($tasks as $key => $value){
+            $comments = ORM::for_table(comments)->where('id_task', $key)->find_array();
+            $count_comments = count($comments);
+            $tasks[$key]['countComments'] = $count_comments;
+        }
         return $tasks;
     }
 
