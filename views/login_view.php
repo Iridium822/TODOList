@@ -1,24 +1,17 @@
-<h1>Страница авторизации</h1>
-<p>
-<form action="" method="post">
-    <table class="login">
-        <tr>
-            <th colspan="2">Авторизация</th>
-        </tr>
-        <tr>
-            <td>Логин</td>
-            <td><input type="text" name="login"></td>
-        </tr>
-        <tr>
-            <td>Пароль</td>
-            <td><input type="password" name="password"></td>
-        </tr>
-        <th colspan="2" style="text-align: right">
-            <input type="submit" value="Войти" name="btn"
-                   style="width: 150px; height: 30px;"></th>
-    </table>
+
+<form class="form-signin" action="" method="post">
+
+    <h1 class="h3 mb-3 font-weight-normal">Авторизация:</h1>
+
+    <label for="inputLogin" class="sr-only">Логин</label>
+    <input type="input" id="inputLogin" class="form-control" placeholder="Login" name="login" required autofocus>
+    <label for="inputPassword" class="sr-only">Пароль</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+
+
+    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Войти" name="btn">
 </form>
-</p>
+
 
 <?php extract($data); ?>
 <?php if($login_status=="access_granted") { ?>

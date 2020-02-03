@@ -1,7 +1,7 @@
 <html>
 <head>
     <script src="../vendor/components/jquery/jquery.min.js"></script>
-    <script src="../views/js/style_list.js"></script>
+    <script src="../views/js/list_task.js"></script>
 </head>
 <body>
 <button id="addTask" data-id="0">Add</button>

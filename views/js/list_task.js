@@ -49,7 +49,10 @@ function editTask() {
 }
 
 function addComment() {
+
     $("#comment, #saveComment").show();
+    $('#comment').val("");
+
     $("#addComment").hide();
 }
 
@@ -65,6 +68,7 @@ function saveComment() {
         url: "../comment/saveComment/"
     }).done(function() {
         $("#listComments").append("<li>" + comment.text_comment + "</li>");
+
         $("#comment, #saveComment").hide();
         $("#addComment").show();
     }).fail(function() {
@@ -125,8 +129,8 @@ function showTasks(tasks) {
         }
         content.append(
             "<div>" +
-            "<a class='editTask' href='#' data-id='" + task.id + "'>" + task.task_name + "</a>" +
-            "<span>(" + task.countComments +  ")</span>" +
+            "<a class='editTask list-group-item list-group-item-action' href='#' data-id='" + task.id + "'>" + task.task_name  +
+            "<span class='badge badge-primary badge-pill'>" + task.countComments +  "</span>" + "</a>" +
             "</div>"
         );
     }
