@@ -18,7 +18,7 @@ class Model_Task extends Model
         //echo count($tasks);
         for ($i=0; $i < count($tasks); $i++){
             $count_comments = 0;
-            $comments = ORM::for_table(comments)->where('id_task', $i+1)->find_array();
+            $comments = ORM::for_table('comments')->where('id_task', $tasks[$i]['id'])->find_array();
             //var_dump($comments);
             $count_comments = count($comments);
             $tasks[$i]['countComments'] = $count_comments;
@@ -30,7 +30,7 @@ class Model_Task extends Model
     static public function editTask($id){
         $tasks = ORM::for_table('tasks')->where('id', $id)->find_array();
         $task = $tasks[0];
-        $comments = ORM::for_table(comments)->where('id_task', $id)->find_array();
+        $comments = ORM::for_table('comments')->where('id_task', $id)->find_array();
         $task['comments'] = $comments;
         return $task;
 
