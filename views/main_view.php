@@ -1,6 +1,5 @@
-
-
 <div id="taskList" class="container">
+    <div id="logout"><a href="logout/"><strong>Logout</strong></a></div>
     <h4>Tasks List</h4>
     <button id="addTask" data-id="0" class="btn btn-primary">Add new task</button>
 
@@ -25,7 +24,7 @@
 <div id="taskEdit" style="display: none" class="col-sm-6">
     <div class="form-group">
         <label>Name task:</label>
-        <input id="taskName" class="form-control"/>
+        <input id="taskName" class="form-control" />
     </div>
     <div class="form-group">
         <label>Status task:</label>

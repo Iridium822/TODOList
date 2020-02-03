@@ -1,14 +1,13 @@
 <?php
 
 
-
 /*
  * Models class
  */
 
 class Model
 {
-    function get_data(){
+    public function getData(){
 
     }
 

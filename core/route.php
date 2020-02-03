@@ -1,11 +1,13 @@
 <?php
+
+
 /*
  * Router Class
  */
 
 class Route
 {
-    static function start()
+    static public function start()
     {
         // default
         $controller_name = 'Main';
@@ -15,21 +17,19 @@ class Route
 
         // get controller name
         //TODO: Parsing url function
-        if ( !empty($routes[2]) )
-        {
+        if ( !empty($routes[2]) ){
             $controller_name = $routes[2];
         }
 
         // get action name
-        if ( !empty($routes[3]) )
-        {
+        if ( !empty($routes[3]) ){
             $action_name = $routes[3];
         }
 
         // add prefix
-        $model_name = 'Model_'.$controller_name;
-        $controller_name = 'Controller_'.$controller_name;
-        $action_name = 'action_'.$action_name;
+        $model_name = 'Model'.$controller_name;
+        $controller_name = 'Controller'.$controller_name;
+        $action_name = 'action'.$action_name;
 
 
         //echo "Model: $model_name <br>";
@@ -38,23 +38,19 @@ class Route
 
 
         // get model file
-
         $model_file = strtolower($model_name).'.php';
         $model_path = "models/".$model_file;
-        if(file_exists($model_path))
-        {
-            require_once "models/".$model_file;
+        if(file_exists($model_path)){
+            require "models/".$model_file;
         }
 
         // get controller file
         $controller_file = strtolower($controller_name).'.php';
         $controller_path = "controllers/".$controller_file;
-        if(file_exists($controller_path))
-        {
-            require_once "controllers/".$controller_file;
+        if(file_exists($controller_path)){
+            require "controllers/".$controller_file;
         }
-        else
-        {
+        else{
 
             Route::ErrorPage404();
         }
@@ -63,14 +59,11 @@ class Route
         $controller = new $controller_name;
         $action = $action_name;
 
-        if(method_exists($controller, $action))
-        {
+        if(method_exists($controller, $action)){
             // Run action
             $controller->$action();
         }
-        else
-        {
-
+        else{
             Route::ErrorPage404();
         }
 

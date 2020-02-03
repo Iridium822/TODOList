@@ -14,13 +14,8 @@
     "components/jquery": "^3.4",
     "twbs/bootstrap": "4.3.1",
     "j4mie/idiorm": "^1.5"
-  },
-
-  "autoload": {
-    "psr4": {
-      "app\\core\\": "core",
-      "app\\controllers\\": "controllers",
-      "app\\models\\": "models"
-    }
   }
+
+
+
 }

@@ -1,20 +1,30 @@
 <?php
 
+
 /*
  * Controller class
  */
+
 class Controller
 {
-    public $model;
-    public $view;
+    protected $model;
+    protected $view;
 
-    function __construct()
+    public function __construct()
     {
-
         $this->view = new View();
+        $this->model = new Model();
     }
 
-    function action_index(){
+    public function actionIndex()
+    {
+        session_start();
+        if ($_SESSION['user_id'] && $_SESSION['user_login']){
+            //header('Location: /TODOList/views/index.php');
+            view::generate('main_view.php', 'template_view.php');
+        }else{
+            header('Location:/TODOList/login/');
+        }
 
     }
 

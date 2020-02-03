@@ -1,7 +1,7 @@
 <?php
 // Autoload classes
 spl_autoload_register(function ($class) {
-    require_once 'core/' . $class . '.php';
+    require_once 'Core/'.$class . '.php';
 });
 
 // Load package
@@ -11,4 +11,6 @@ require_once 'vendor/autoload.php';
 require_once 'cfg/config.php';
 
 // Run project
+
+
 Route::start();

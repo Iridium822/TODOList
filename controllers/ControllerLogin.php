@@ -1,21 +1,21 @@
 <?php
 
 
-class Controller_Login extends Controller
+class ControllerLogin extends Controller
 {
+    public $model;
+
     public function __construct()
     {
-        $this->model = new Model_Login();
+        $this->model = new ModelLogin();
 
     }
 
-    function action_index()
+    public function actionIndex()
     {
         //$data["login_status"] = "";
-
-
-        if(isset($_POST['login']) && isset($_POST['password']))
-        {
+        // TODO: add registration users module, hash password, verification users
+        if(isset($_POST['login']) && isset($_POST['password'])){
             $login = $_POST['login'];
             $password =$_POST['password'];
             if ($this->model->getLogin($login,$password)){
@@ -25,20 +25,16 @@ class Controller_Login extends Controller
                 $data["login_status"] = "access_enable";
                 header('Location:/TODOList/main/');
 
-
             }else{
                 $data["login_status"] = "access_denied";
-
             }
 
-
         }
-        else
-        {
+        else{
             $data["login_status"] = " ";
 
         }
-        view::generate('login_view.php', 'template_view.php', $data);
+        View::generate('login_view.php', 'template_view.php', $data);
 
     }
 }
