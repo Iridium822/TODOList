@@ -38,8 +38,13 @@ class ModelTask extends Model
      */
     static public function editTask($id)
     {
-        $tasks = ORM::for_table('tasks')->join('comments','tasks.id=comments.id_task')->where('id', $id)->find_array();
-        return $tasks;
+
+        $tasks = ORM::for_table('tasks')->where('id', $id)->find_array();
+        $task = $tasks[0];
+        $comments = ORM::for_table('comments')->where('id_task', $id)->find_array();
+        //var_dump($tasks);
+        $task['comments'] = $comments;
+        return $task;
 
     }
 
