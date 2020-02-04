@@ -10,7 +10,7 @@ class ModelLogin extends Model
     /*
      * Verification User function
      */
-    public function getLogin($user_name, $psw)
+    public static function getLogin($user_name, $psw)
     {
         $user_count = ORM::for_table('users')
             ->where(array(

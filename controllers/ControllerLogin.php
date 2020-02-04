@@ -7,8 +7,8 @@ class ControllerLogin extends Controller
 
     public function __construct()
     {
-        $this->model = new ModelLogin();
 
+        //$this->model = new ModelLogin();
     }
 
     public function actionIndex()
@@ -18,12 +18,17 @@ class ControllerLogin extends Controller
         if(isset($_POST['login']) && isset($_POST['password'])){
             $login = $_POST['login'];
             $password =$_POST['password'];
-            if ($this->model->getLogin($login,$password)){
+            if (ModelLogin::getLogin($login,$password)){
                 session_start();
-                $_SESSION['user_id'] = $this->model->getLogin($login,$password);
+                $_SESSION['user_id'] = ModelLogin::getLogin($login,$password);
                 $_SESSION['user_login'] =  $login;
                 $data["login_status"] = "access_enable";
-                header('Location:/TODOList/main/');
+                $host  = $_SERVER['HTTP_HOST'];
+                $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+                $extra = 'main/';
+                header("Location: http://$host$uri/$extra");
+                exit;
+
 
             }else{
                 $data["login_status"] = "access_denied";

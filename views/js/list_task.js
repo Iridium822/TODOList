@@ -1,5 +1,11 @@
 var taskId = null;
 $(document).ready(function() {
+    var url= window.location.href;
+    if (url.indexOf("index/")>0){
+        url = url.replace("index/","");
+        window.location.href = url;
+
+    }
     eventsBind();
     loadTasks();
 

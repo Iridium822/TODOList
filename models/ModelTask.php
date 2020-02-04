@@ -38,23 +38,26 @@ class ModelTask extends Model
      */
     static public function editTask($id)
     {
-        $tasks = ORM::for_table('tasks')->where('id', $id)->find_array();
-        $task = $tasks[0];
-        $comments = ORM::for_table('comments')->where('id_task', $id)->find_array();
-        $task['comments'] = $comments;
-        return $task;
+        $tasks = ORM::for_table('tasks')->join('comments','tasks.id=comments.id_task')->where('id', $id)->find_array();
+        return $tasks;
 
     }
 
+    /*
+     * Save Task Function
+     */
     static public function saveTask($data)
     {
 
         $id_task = $data['task_id'];
+        // Edit Task
         if ($id_task > 0) {
             $task = ORM::for_table('tasks')->where('id', $id_task)->find_one();
+        // Create Task
         } else {
+
             $task = ORM::for_table('tasks')->create();
-            $task->id_user=1;
+            $task->id_user = $data['user_id'];
         }
 
         $task->task_status=$data['task_status'];

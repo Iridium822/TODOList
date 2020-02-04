@@ -23,7 +23,11 @@ class Controller
             //header('Location: /TODOList/views/index.php');
             view::generate('main_view.php', 'template_view.php');
         }else{
-            header('Location:/TODOList/login/');
+            $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+            $extra = 'login/';
+            header("Location: http://$host$uri/$extra");
+            exit;
+
         }
 
     }
