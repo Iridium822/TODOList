@@ -33,7 +33,7 @@ class ControllerTask extends Controller
             $data = ModelTask::editTask($_GET['id']);
             echo json_encode($data);
         }
-
+k
     }
 
     /*
@@ -44,6 +44,8 @@ class ControllerTask extends Controller
     {
         if (isset($_POST)){
             $data = $_POST;
+            session_start();
+            $data['user_id'] = $_SESSION['user_id'];
             ModelTask::saveTask($data);
 
         }
