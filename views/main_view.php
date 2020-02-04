@@ -1,5 +1,5 @@
 <div id="taskList" class="container">
-    <div id="logout"><a href="logout/"><strong>Logout</strong></a></div>
+    <div id="logout"><a href="../login/logout/"><strong>Logout</strong></a></div>
     <h4>Tasks List</h4>
     <button id="addTask" data-id="0" class="btn btn-primary">Add new task</button>
 

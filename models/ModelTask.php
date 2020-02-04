@@ -10,23 +10,15 @@ class ModelTask extends Model
 
     /*
      * Get Tasks Function
-     * Return tasks array from database
+     * @Return tasks array
      */
     static public function getTasks($user_id)
     {
-
-        $tasks = ORM::for_table('tasks')->where('id_user', $user_id)
-            ->order_by_desc('task_date')
-            ->find_array();
+        $tasks = ORM::for_table('tasks')->left_outer_join('comments', 'comments.id_task=tasks.id')->
+        selectMany('tasks.id','tasks.task_status','tasks.task_date','tasks.task_name','tasks.task_description')->
+            select_expr('COUNT(comments.id)', 'countComments')->
+            groupBy('tasks.id')->order_by_desc('task_date')->findArray();
         //var_dump($tasks);
-        //echo count($tasks);
-        for ($i=0; $i < count($tasks); $i++){
-            //$count_comments = 0;
-            $comments = ORM::for_table('comments')->where('id_task', $tasks[$i]['id'])->find_array();
-            //var_dump($comments);
-            $count_comments = count($comments);
-            $tasks[$i]['countComments'] = $count_comments;
-        }
 
         return $tasks;
     }
@@ -34,7 +26,7 @@ class ModelTask extends Model
 
     /*
      * Edit Task Function
-     *
+     *@return task array
      */
     static public function editTask($id)
     {

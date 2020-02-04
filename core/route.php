@@ -9,7 +9,7 @@ class Route
 {
     static public function start()
     {
-        // default
+
         spl_autoload_register(function ($class) {
             if (file_exists('Core/'.$class . '.php')) {
                 require 'Core/' . $class . '.php';
@@ -42,10 +42,12 @@ class Route
 
                 $controller_name1->$action_name();
             }
+            else{
+                Route::ErrorPage404();
+            }
+        }else{
+            Route::ErrorPage404();
         }
-
-
-
     }
 
     static public function ErrorPage404()

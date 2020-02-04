@@ -3,6 +3,7 @@
 
 class ControllerComment extends Controller
 {
+
     public function actionIndex()
     {
         parent::actionIndex();
@@ -17,8 +18,12 @@ class ControllerComment extends Controller
         if (isset($_POST)) {
             $data = $_POST;
             ModelComment::saveComment($data);
+            echo json_encode(1);
+
+        }else{
+            return false;
         }
 
-        echo json_encode(1);
+
     }
 }

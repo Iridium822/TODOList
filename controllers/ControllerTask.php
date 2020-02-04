@@ -31,9 +31,9 @@ class ControllerTask extends Controller
     {
         if (isset($_GET['id']) && $_GET['id']>0){
             $data = ModelTask::editTask($_GET['id']);
-            echo json_encode($data);
-        }
 
+        }
+        echo json_encode($data);
     }
 
     /*

@@ -17,16 +17,14 @@ class ModelLogin extends Model
                 'login' => $user_name,
                 'psw_hash' => $psw
             ))->count();
-        if ($user_count > 0) {
-            $user = ORM::for_table('users')
-                ->where(array(
-                    'login' => $user_name,
-                    'psw_hash' => $psw
-                ))->find_one();
-            return $user->id_user;
-
-        }else{
-            return false;
-        }
+        $auth = ($user_count > 0)?true:false;
+        return $auth;
     }
+
+    public static function getId($login){
+        $user = ORM::for_table('users')
+            ->where('login',$login)->find_one();
+        return $user->id_user;
+    }
+
 }
