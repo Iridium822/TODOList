@@ -33,7 +33,7 @@ class ControllerTask extends Controller
             $data = ModelTask::editTask($_GET['id']);
             echo json_encode($data);
         }
-k
+
     }
 
     /*
