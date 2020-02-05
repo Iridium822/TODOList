@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 03 2020 г., 01:15
--- Версия сервера: 5.7.25
--- Версия PHP: 7.1.32
+-- Время создания: Фев 05 2020 г., 11:23
+-- Версия сервера: 5.7.23
+-- Версия PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -40,13 +40,9 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `comment_date`, `text_comment`, `id_task`) VALUES
-(1, '2020-02-03 00:53:25', '77777', 1),
-(2, '2020-02-03 00:53:41', 'TTTTTT', 1),
-(3, '2020-02-03 00:56:05', 'TTTTTT', 1),
-(4, '2020-02-03 00:56:19', '1111', 1),
-(5, '2020-02-03 00:56:36', '5555', 1),
-(6, '2020-02-03 00:57:21', 'cfdhuy', 1),
-(7, '2020-02-03 00:59:15', 'rtehu', 1);
+(1, '2020-02-05 11:19:56', 'Comment1', 2),
+(2, '2020-02-05 11:20:28', 'Comment2\n', 2),
+(3, '2020-02-05 11:21:10', 'Comment 7', 3);
 
 -- --------------------------------------------------------
 
@@ -68,8 +64,10 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `task_status`, `task_date`, `task_name`, `task_description`, `id_user`) VALUES
-(1, 'DOING', '2020-02-03 00:56:22', '111', 'axaxa77789', 1),
-(2, 'TODO', '2020-02-03 01:13:00', 'test1', 'frwfgtr', 1);
+(1, 'TODO', '2020-02-05 11:18:53', 'Task1', 'To do task1', 1),
+(2, 'DOING', '2020-02-05 11:20:30', 'Task2', 'Description task2', 1),
+(3, 'DONE', '2020-02-05 11:21:12', 'Task3', 'Description task3', 1),
+(4, 'DOING', '2020-02-05 11:20:53', 'Task4', 'Description task4', 1);
 
 -- --------------------------------------------------------
 
@@ -123,13 +121,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

@@ -30,8 +30,8 @@ class ControllerLogin extends Controller
             }else{
                 echo 'Authenticate required!';
                 session_destroy();
-                session_unset($_SESSION['user_id']);
-                session_unset($_SESSION['user_login']);
+                //session_unset($_SESSION['user_id']);
+                //session_unset($_SESSION['user_login']);
             }
 
         }
@@ -44,8 +44,8 @@ class ControllerLogin extends Controller
     {
         session_start();
         session_destroy();
-        session_unset($_SESSION['user_id']);
-        session_unset($_SESSION['user_login']);
+       // session_unset($_SESSION['user_id']);
+        //session_unset($_SESSION['user_login']);
         $host = $_SERVER['HTTP_HOST'];
         $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
         $extra = 'login/';

@@ -52,10 +52,13 @@ class Route
 
     static public function ErrorPage404()
     {
-        $host = 'http://'.SERVER_PATH;
+        //$host = $_SERVER['HTTP_HOST'];
+        //$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        //$extra = 'Page404/';
+
         header('HTTP/1.1 404 Not Found');
         header("Status: 404 Not Found");
-        header('Location:'.$host.'404');
+        //header('Location:http://$host$uri/$extra 404');
 
     }
 

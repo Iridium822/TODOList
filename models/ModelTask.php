@@ -57,9 +57,9 @@ class ModelTask extends Model
             $task->id_user = $data['user_id'];
         }
 
-        $task->task_status=$data['task_status'];
-        $task->task_description=$data['task_description'];
-        $task->task_name=$data['task_name'];
+        $task->task_status = $data['task_status'];
+        $task->task_description = $data['task_description'];
+        $task->task_name = $data['task_name'];
         $task->task_date = date('Y-m-d H:i:s');
         $task->save();
 
